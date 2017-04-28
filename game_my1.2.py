@@ -46,7 +46,7 @@ def print_board(board):
 def main():
     life = 100
 
-    backpack = ['key']
+    backpack = []
     chest_1 = ['key', 'piece_of_map_1', 'chocolate_bar']
 
     y_axis = 1
@@ -63,6 +63,13 @@ def main():
         print_board(board)
 
         print("Life: ", life)
+
+        if len(backpack) == 0:
+            print("BACKPACK: --- ")
+        else:
+            print("BACKPACK:\n",'\n'.join(backpack))
+
+
 
         pressedkey = getch()   # 4 petle definiujace ruch postaci
         if pressedkey is 'w' or pressedkey is 'W':
@@ -95,26 +102,23 @@ def main():
 
         if pressedkey is "q":
             break
+        
 
-        if pressedkey is 'b' or pressedkey is 'B':  # Ta opsja pozwala nam otworzyc plecak i nastepnie wraca do mapy
-            os.system('clear')
-            for items in backpack:
-                print (items)
+        if pressedkey == 'o':
+            if board[1][8] == '@' or board[2][9] == '@' or board[2][10] == '@' or board[1][11] == '@':
+                print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                backpack.extend(chest_1)
+                del chest_1[:]
+                time.sleep(2)
+            elif backpack[0] == 'key' and  board[13][16] =='@':
+                board[13][17] = '.'
+            else:
+                continue
 
 
-            #if pressedkey == 'm' or pressedkey is 'M':
-                #print_board(board)
 
 
-        if pressedkey == 'o' and (board[1][8] == '@' or board[2][9] == '@' or board[2][10] == '@' or board[1][11] == '@'):
-            print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
-            time.sleep(3)
-            backpack.extend(chest_1)
-            del chest_1[:]
-            print(backpack)
 
-        if pressedkey =='o' and backpack[0] == 'key' and  board[13][16] =='@':
-            board[13][17] = '.'
 
 
 
