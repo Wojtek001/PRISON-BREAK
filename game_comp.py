@@ -28,6 +28,9 @@ def intro_screen():
         print("")
     print('''
 
+
+
+
     You are a prisoner in Fort Knox.
     They caught you when you stole a loaf of bread and sentenced you for 20 years because you are black.
     You disagree with this unjust punishment, and the only thing you think about is to escape from here.
