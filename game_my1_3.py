@@ -152,6 +152,11 @@ def main():
             board = create_board(filename)
             insert_player(board, y_axis, x_axis)
 
+        if filename =="board_3.csv" and board[36][24] == '@':
+            filename = "board_4.csv"
+            board = create_board(filename)
+            insert_player(board, y_axis, x_axis)
+
 
 if __name__ == '__main__':
     main()
