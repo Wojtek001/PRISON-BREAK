@@ -107,8 +107,7 @@ def hang_main():
 
         else:
             print("\nYou didn't get ", capital, " sorry you are HANGMAN!")
-            again = play_again()
+            True
 
 if __name__ == '__main__':
     hang_main()
-

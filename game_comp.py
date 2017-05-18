@@ -27,18 +27,17 @@ def intro_screen():
     for i in range(20):
         print("")
     print('''
-      
-      
-      
-      
+
+
+
+
     You are a prisoner in Fort Knox.
     They caught you when you stole a loaf of bread and sentenced you for 20 years because you are black.
     You disagree with this unjust punishment, and the only thing you think about is to escape from here.
     From your fellow prisoners you hearded about the legendary map of tunnels unnder the prison,
     that will allow you to get out of here.
-    To run out from here you will have to find all 4 pieces of legandary map which helps you avoid all traps
-    hidden in floor and walls.
-    Your task is to get out from the prison and escape from (or kill) all the guards!
+
+    Your task is to get out from the prison and avoid traps hidden in the floor!
 
 
 
@@ -49,15 +48,27 @@ def intro_screen():
                                                     Controls:
 
                                                     w - move up             o - open (chests/ dors)
-                                                    s - move down           u - use items
+                                                    s - move down           g - play mini game
                                                     a - move left           q - quit game
                                                     d - move right
 
     ''')
 
 
-    for i in range(20):
+    for i in range(15):
         print("")
+    go_back = input(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESS ANY KEY TO CONTINUE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>").lower()
+    for i in range(5):
+        print("")
+    if go_back == "c":
+        return
+    else:
+        None
+def main():
+    welcome()
+    intro_screen()
 
-welcome()
-intro_screen()
+
+
+if __name__ == '__main__':
+    main()
