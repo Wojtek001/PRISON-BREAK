@@ -1,5 +1,7 @@
 import random
 import sys
+import time
+
 min = 1
 max = 6
 print("To win the game your numbers sum must be equal 7 or 10 or 12. Good luck!")
@@ -16,7 +18,8 @@ def dice_main():
     sum = num_1 + num_2
     if sum == 7 or sum == 10 or sum == 12:
         print("You win!")
-        sys.exit()
+        time.sleep(1)
+        return
     else:
         play_again()
 
@@ -24,10 +27,9 @@ def dice_main():
 def play_again():
     decision = input("Press 'y' to roll again or any other key to escape the program:  ").lower()
     if decision == "y":
-        main()
+        dice_main()
     else:
-        print('See You later!')
-        sys.exit()
+        return
 
-
-dice_main()
+if __name__ == '__main__':
+    dice_main()

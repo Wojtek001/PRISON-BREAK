@@ -103,10 +103,12 @@ def hang_main():
             print("\nYou guessed ", capital, " it took you {} seconds to guess the number and you have {} lifes left "
                   .format(round(end_time), lifes))
             # zgadłeś, coś dostajesz,może klucz czy coś?
-            sys.exit()
+            return
+
         else:
             print("\nYou didn't get ", capital, " sorry you are HANGMAN!")
             again = play_again()
 
+if __name__ == '__main__':
+    hang_main()
 
-hang_main()
