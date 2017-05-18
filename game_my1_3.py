@@ -58,9 +58,41 @@ def add_to_inventory(inventory, added_items):
             inventory[item] = 1
     return(inventory)
 
+def print_table(inventory, order=None):
+
+    sorted_inventory = []
+    total_items = 0
+    #sprawdza długość najdłuższego słowa w słowniku
+    length = []
+    for element in inventory:
+        length.append(len(element))
+    space = int(max(length)+3)
+
+    #wyświetla tabelę 1 - od najmniejszego do największego, 2 - od największego do najmniejszego
+    #nic - losowo
+    print('{:>{width}} {:>{width}}'.format("item name","count", width = space))
+    #wyrównuje do prawej {szerokość kolumny} x2 - 2 kolumny .format (co ma być w kolumnach , wartość-szerokości)
+    print("-"*space*2)
+    if order == 1:
+        sorted_inventory = sorted(inventory.items(), key=lambda x:x[1], reverse=False)
+        for element in sorted_inventory:
+            print('{:>{width}} {:>{width}}'.format(element[0], element[1], width = space))
+    elif order == 2:
+        sorted_inventory = sorted(inventory.items(), key=lambda x:x[1], reverse=True)
+        for element in sorted_inventory:
+            print('{:>{width}} {:>{width}}'.format(element[0], element[1], width = space))
+    else:
+        for element in inventory:
+            print('{:>{width}} {:>{width}}'.format(element, inventory[element], width = space))
+
 
 
 #****************WŁĄCZANIE GIER
+def start_screen():
+    import game_comp
+    game_comp.main()
+
+
 def first_game():
     import mini_hang
     mini_hang.hang_main()
@@ -75,17 +107,23 @@ def third_game():
     import roll_dice
     roll_dice.dice_main()
 
+def final_game():
+    import dojo_warm_hot
+    dojo_warm_hot.main()
+
 #*********************************
 
 def main():
+    start_screen()
+
     points = 100
 
-    inventory = {}
-    chest_1 = ['key_1','key_2','key_3', 'piece_of_map_1', 'chocolate_bar']
-    chest_2 = ['key_2', 'piece_of_map_1', 'chocolate_bar']
-    chest_3 = ['key_3', 'piece_of_map_1', 'chocolate_bar']
-    chest_4 = ['key_4', 'piece_of_map_1', 'chocolate_bar']
-    chest_5 = ['piece_of_map_1', 'chocolate_bar']
+    inventory = {'torch':1}
+    chest_1 = ['key_1', 'shovel', 'torch', 'goldcoin']
+    chest_2 = ['key_2', 'torch', 'helmet']
+    chest_3 = ['key_3', 'calculator', 'shovel']
+    chest_4 = ['key_4', 'calculator', 'torch']
+    chest_5 = ['goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin',]
     y_axis = 1
     x_axis = 1
 
@@ -100,9 +138,10 @@ def main():
         os.system('clear')
         print_board(board)
 
-        print("Points: ", points)
-
-        display_inventory(inventory)
+        print('')
+        print("***** Points: ", points,"*****")
+        print('')
+        print_table(inventory, 1)
 
         pressedkey = getch()   # 4 petle definiujace ruch postaci
         if pressedkey is 'w' or pressedkey is 'W':
@@ -161,55 +200,55 @@ def main():
         if pressedkey == 'o' and filename == 'board_1.csv':
             if board[1][8] == '@' or board[2][9] == '@' or board[2][10] == '@' or board[1][11] == '@':
                 if len(chest_1) > 0:
-                    print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                    print("You opened the chest and found some items. Now it's in your backpack")
                     add_to_inventory(inventory, chest_1)
                     del chest_1[:]
                     time.sleep(2)
                 else:
-                    print("EMPTY")
+                    print("                     EMPTY")
                     time.sleep(0.5)
             #otwieranie 2 skrzynki
         if pressedkey == 'o' and filename == 'board_2.csv':
             if board[6][23] == '@' or board[5][24] == '@' or board[5][25] == '@':
                 if len(chest_2) > 0:
-                    print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                    print("You opened the chest and found some items. Now it's in your backpack")
                     add_to_inventory(inventory, chest_2)
-                    del chest_1[:]
+                    del chest_2[:]
                     time.sleep(2)
                 else:
-                    print("EMPTY")
+                    print("                     EMPTY")
                     time.sleep(0.5)
             #otwieranie 3 skrzynki
         if pressedkey == 'o' and filename == 'board_3.csv':
             if board[32][35] == '@' or board[33][36] == '@' or board[33][37] == '@':
                 if len(chest_3) > 0:
-                    print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                    print("You opened the chest and found some items. Now it's in your backpack")
                     add_to_inventory(inventory, chest_3)
-                    del chest_1[:]
+                    del chest_3[:]
                     time.sleep(2)
                 else:
-                    print("EMPTY")
+                    print("                     EMPTY")
                     time.sleep(0.5)
             #otwieranie 4 skrzynki
         if pressedkey == 'o' and filename == 'board_4.csv':
             if board[34][6] == '@' or board[35][4] == '@' or board[35][5] == '@':
                 if len(chest_4) > 0:
-                    print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                    print("You opened the chest and found some items. Now it's in your backpack")
                     add_to_inventory(inventory, chest_4)
-                    del chest_1[:]
+                    del chest_4[:]
                     time.sleep(2)
                 else:
-                    print("EMPTY")
+                    print("                     EMPTY")
                     time.sleep(0.5)
             #otwieranie 5 skrzynki
             elif board[30][15] == '@' or board[30][16] == '@':
                 if len(chest_5) > 0:
-                    print("You opened the chest and found a key and a chocolate bar. Now it's in your backpack")
+                    print("You opened the chest and found some items. Now it's in your backpack")
                     add_to_inventory(inventory, chest_5)
-                    del chest_1[:]
+                    del chest_5[:]
                     time.sleep(2)
                 else:
-                    print("EMPTY")
+                    print("                     EMPTY")
                     time.sleep(0.5)
 
 #******************************OTWIERANIE DRZWI*********************************
@@ -249,6 +288,9 @@ def main():
         if pressedkey == 'g' and filename == 'board_3.csv':
             if board[25][24] == '@' or board[25][25] == '@' or board[24][26] == '@':
                 third_game()
+        if pressedkey == 'g' and filename == 'board_4.csv':
+            if board[24][1] == '@' or board[25][2] == '@' or board[25][3] == '@':
+                final_game()
 
 #*********************ZMIANA MAPY**************************************
 
