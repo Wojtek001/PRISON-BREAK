@@ -173,7 +173,6 @@ def main():
 
 
     while True:
-
         os.system('clear')
         print_board(board)
 
