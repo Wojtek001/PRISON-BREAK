@@ -18,7 +18,7 @@ def end_screen():
         print("")
 
     quit = input("To quit press q, to play again press any key").lower()
-    if quit == q:
+    if quit == "q":
         sys.exit()
 
 
