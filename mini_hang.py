@@ -49,8 +49,7 @@ def play_again():
     if (again == "Y"):
         pass
     else:
-        sys.exit()
-    return
+        return
 
 
 def hang_main():
@@ -102,6 +101,7 @@ def hang_main():
             end_time = time.time() - start_time
             print("\nYou guessed ", capital, " it took you {} seconds to guess the number and you have {} lifes left "
                   .format(round(end_time), lifes))
+            time.sleep(1.5)
             # zgadłeś, coś dostajesz,może klucz czy coś?
             return
 
