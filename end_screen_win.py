@@ -20,7 +20,6 @@ def end_screen():
         print("")
     
     time.sleep(2)
-    sys.exit()
 
 
 if __name__ == '__main__':
