@@ -2,6 +2,7 @@ import time
 import sys
 import random
 import os
+import csv
 
 # list of hangman elements ;-)
 arts = ["-----\n|   |\n|\n|\n|\n|\n|\n|\n|\n--------",
@@ -19,7 +20,10 @@ arts = ["-----\n|   |\n|\n|\n|\n|\n|\n|\n|\n--------",
 def get_capital():
 
     """choose random capital from list"""
-    capitals = ('VIENNA', 'BRUSSELS', 'SOFIA', 'ZAGREB', 'NICOSIA', 'PRAQUE', 'COPENHAGEN', 'TALLINN', 'HELSINKI', 'PARIS', 'BERLIN', 'ATHENS', 'BUDAPEST', 'DUBLIN', 'ROME', 'RIGA', 'VILNIUS', 'LUXEMBOURG', 'SKOPJE', 'VALETTA', 'AMSTERDAM', 'WARSAW', 'LISBON', 'BUCHAREST', 'BRATISLAVA', 'LJUBLJANA', 'MADRID', 'STOCKHOLM', 'LONDON')
+    capitals = ('VIENNA', 'BRUSSELS', 'SOFIA', 'ZAGREB', 'NICOSIA', 'PRAQUE', 'COPENHAGEN', 'TALLINN',\
+     'HELSINKI', 'PARIS', 'BERLIN', 'ATHENS', 'BUDAPEST', 'DUBLIN', 'ROME', 'RIGA', 'VILNIUS',\
+      'LUXEMBOURG', 'SKOPJE', 'VALETTA', 'AMSTERDAM', 'WARSAW', 'LISBON', 'BUCHAREST', 'BRATISLAVA',\
+       'LJUBLJANA', 'MADRID', 'STOCKHOLM', 'LONDON')
     return random.choice(capitals).upper()
 
 
@@ -44,6 +48,7 @@ def clear_n_print_arts(lifes):
 
 def hang_main():
     os.system('clear')
+    hang_points = 0
     # lista sprawdza czy już wygrałeś
 
     while True:
@@ -94,7 +99,10 @@ def hang_main():
             print("\nYou guessed ", capital, " it took you {} seconds to guess the number and you have {} lifes left "
                   .format(round(end_time), lifes))
             time.sleep(1.5)
-            # zgadłeś, coś dostajesz,może klucz czy coś?
+            points_hangman = [60]
+            with open('points.csv', mode='w') as outfile:
+                writer = csv.writer(outfile)
+                writer.writerow(points_hangman)
             return
 
         else:

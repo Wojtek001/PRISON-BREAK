@@ -1,5 +1,7 @@
 import random
-import game_my1_3
+import csv
+import os
+
 
 riddles = {'I go in hard. I come out soft. You blow me hard. What am I?': 'chewing gum',
            'What belongs to you but others use it more than you do?': 'name',
@@ -8,18 +10,26 @@ riddles = {'I go in hard. I come out soft. You blow me hard. What am I?': 'chewi
 
 
 def riddle():
-
+    os.system('clear')
+    points_riddle = 0
     for key in riddles:
-        points = 0
         print(key)
         answer = input()
         if answer.lower() == riddles[key]:
-            points += 1
+            points_riddle += 10
+            print(points_riddle)
             print('Good answer, congrats!')
-        
         else:
             print('Wrong!')
-    
+
+    points_riddle = [points_riddle]
+
+    with open('points.csv', mode='w') as outfile:
+        writer = csv.writer(outfile)
+        writer.writerow(points_riddle)
+
+    print("sum: ",points_riddle)
+
 
 
 if __name__ == '__main__':

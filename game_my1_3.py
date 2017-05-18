@@ -7,6 +7,7 @@ import termios
 import csv
 
 
+
 def getch():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -87,7 +88,7 @@ def print_table(inventory, order=None):
 
 
 
-#****************WŁĄCZANIE MODUŁÓW
+#****************WŁĄCZANIE MODUŁÓW*****************************************
 def start_screen():
     import game_comp
     game_comp.main()
@@ -105,6 +106,7 @@ def first_game():
 def second_game():
     import zagadki
     zagadki.riddle()
+
 
 
 def third_game():
@@ -128,15 +130,15 @@ def guards_main(inventory,board):
             #   || ||               #   || ||                #   || ||
            .#---'| |----.          .#---'| |----.           .#---'| |----.
             #----' -----'           #----' -----'            #----' -----'
-    
-    
+
+
     If you have 5 gold coins you can pass, else you have to play our game to go away!
-    
+
     ''')
 
     answer = input('Press p to pay or any other key to play the game: ').lower()
 
-    if answer == 'p' and inventory['goldcoin'] > 4:
+    if answer == 'p' and inventory['goldcoin'] > 7:
         board[44][10] = '.'
     else:
         final_game()
@@ -146,7 +148,7 @@ def guards_main(inventory,board):
 
 def final_game():
     import dojo_warm_hot
-    dojo_warm_hot.main()
+    dojo_warm_hot.user_guess()
 
 
 
@@ -158,11 +160,11 @@ def main():
     points = 20
 
     inventory = {'torch':1}
-    chest_1 = ['key_1', 'shovel', 'torch', 'goldcoin']
-    chest_2 = ['key_2', 'torch', 'helmet']
-    chest_3 = ['key_3', 'calculator', 'shovel']
-    chest_4 = ['key_4', 'calculator', 'torch']
-    chest_5 = ['goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin',]
+    chest_1 = ['key_1', 'shovel', 'torch', 'goldcoin', 'game_ticket', 'game_ticket']
+    chest_2 = ['key_2', 'torch', 'helmet','game_ticket', 'game_ticket']
+    chest_3 = ['key_3', 'calculator', 'shovel','game_ticket', 'game_ticket']
+    chest_4 = ['goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin','goldcoin']
+    chest_5 = ['calculator', 'torch', 'hot-dog']
     y_axis = 1
     x_axis = 1
 
@@ -321,15 +323,48 @@ def main():
                 board[34][17] = '.'
 
 #***********WŁĄCZANIE MINIGIER**************************************
-        if pressedkey == 'g':
+        if pressedkey == 'g' and 'game_ticket' in inventory:
             if board[10][3] == '@' or board[11][1] == '@' or board[11][2] == '@':
                 first_game()
+                inventory['game_ticket'] = inventory['game_ticket'] -1
+
+                with open("points.csv", mode='r') as infile:
+                    reader = csv.reader(infile)
+                    for rows in reader:
+                        game_point = rows
+                print (game_point)
+                points = points + int(game_point[0])
+
+
+
         if pressedkey == 'g' and filename == 'board_2.csv':
             if board[13][35] == '@' or board[12][36] == '@' or board[12][37] == '@':
                 second_game()
+                inventory['game_ticket'] = inventory['game_ticket'] -1
+
+                with open("points.csv", mode='r') as infile:
+                    reader = csv.reader(infile)
+                    for rows in reader:
+                        game_point = rows
+                print (game_point)
+                points = points + int(game_point[0])
+
+
+
+
         if pressedkey == 'g' and filename == 'board_3.csv':
             if board[25][24] == '@' or board[25][25] == '@' or board[24][26] == '@':
                 third_game()
+                inventory['game_ticket'] = inventory['game_ticket'] -1
+
+                with open("points.csv", mode='r') as infile:
+                    reader = csv.reader(infile)
+                    for rows in reader:
+                        game_point = rows
+                print (game_point)
+                points = points + int(game_point[0])
+
+
         if pressedkey == 'g' and filename == 'board_4.csv':
             if board[24][1] == '@' or board[25][2] == '@' or board[25][3] == '@':
                 os.system('clear')
