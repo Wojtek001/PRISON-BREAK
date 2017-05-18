@@ -87,10 +87,14 @@ def print_table(inventory, order=None):
 
 
 
-#****************WŁĄCZANIE GIER
+#****************WŁĄCZANIE MODUŁÓW
 def start_screen():
     import game_comp
     game_comp.main()
+
+def lose_game():
+    import end_screen_lose
+    end_screen_lose.end_screen()
 
 
 def first_game():
@@ -116,7 +120,7 @@ def final_game():
 def main():
     start_screen()
 
-    points = 100
+    points = 20
 
     inventory = {'torch':1}
     chest_1 = ['key_1', 'shovel', 'torch', 'goldcoin']
@@ -134,7 +138,6 @@ def main():
 
 
     while True:
-
         os.system('clear')
         print_board(board)
 
@@ -142,6 +145,11 @@ def main():
         print("***** Points: ", points,"*****")
         print('')
         print_table(inventory, 1)
+
+        if points < 1:
+            print('dupa')
+            lose_game()
+
 
         pressedkey = getch()   # 4 petle definiujace ruch postaci
         if pressedkey is 'w' or pressedkey is 'W':
