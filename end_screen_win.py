@@ -1,3 +1,7 @@
+import time
+import sys
+
+
 def end_screen():
     for i in range(20):
         print("")
@@ -14,7 +18,12 @@ def end_screen():
                                                                                                                                ''')
     for i in range(20):
         print("")
+    
+    time.sleep(2)
+    sys.exit()
 
-end_screen()
+
+if __name__ == '__main__':
+    end_screen()
 
     

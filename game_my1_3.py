@@ -142,7 +142,7 @@ def guards_main(inventory,board):
         final_game()
 
     import end_screen_win
-    end_screen_win.end_screen
+    end_screen_win.end_screen()
 
 def final_game():
     import dojo_warm_hot
