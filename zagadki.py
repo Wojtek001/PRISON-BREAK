@@ -19,7 +19,7 @@ def riddle():
         
         else:
             print('Wrong!')
-    import game_my1_3
+    
 
 
 if __name__ == '__main__':

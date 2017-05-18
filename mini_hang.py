@@ -42,17 +42,9 @@ def clear_n_print_arts(lifes):
     print(arts[9-lifes])
 
 
-def play_again():
-
-    """asks if user wants to play the game again"""
-    again = input("\nPress Y to play again or any key to quit. ").upper()
-    if (again == "Y"):
-        pass
-    else:
-        return
-
-
 def hang_main():
+    os.system('clear')
+    # lista sprawdza czy już wygrałeś
 
     while True:
 
@@ -106,8 +98,9 @@ def hang_main():
             return
 
         else:
-            print("\nYou didn't get ", capital, " sorry you are HANGMAN!")
-            True
+            print("\nYou didn't get ", capital, "try again!")
+            time.sleep(1.5)
+            return
 
 if __name__ == '__main__':
     hang_main()

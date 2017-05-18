@@ -87,10 +87,14 @@ def print_table(inventory, order=None):
 
 
 
-#****************WŁĄCZANIE GIER
+#****************WŁĄCZANIE MODUŁÓW
 def start_screen():
     import game_comp
     game_comp.main()
+
+def lose_game():
+    import end_screen_lose
+    end_screen_lose.end_screen()
 
 
 def first_game():
@@ -107,16 +111,51 @@ def third_game():
     import roll_dice
     roll_dice.dice_main()
 
+
+def guards_main(inventory,board):
+
+    print('''
+            \\\|||///               \\\|||///                \\\|||///
+            .  =======              .  =======               .  =======
+           / \| O   O |            / \| O   O |             / \| O   O |
+           \ /  \v_'/              \ /  \v_'/               \ /  \v_'/
+            #   _| |_               #   _| |_                #   _| |_
+           (#) (     )             (#) (     )              (#) (     )
+            #\//|* *|\\             #\//|* *|\\              #\//|* *|\\
+            #\/(  *  )/             #\/(  *  )/              #\/(  *  )/
+            #   =====               #   =====                #   =====
+            #   (\ /)               #   (\ /)                #   (\ /)
+            #   || ||               #   || ||                #   || ||
+           .#---'| |----.          .#---'| |----.           .#---'| |----.
+            #----' -----'           #----' -----'            #----' -----'
+    
+    
+    If you have 5 gold coins you can pass, else you have to play our game to go away!
+    
+    ''')
+
+    answer = input('Press p to pay or any other key to play the game: ').lower()
+
+    if answer == 'p' and inventory['goldcoin'] > 4:
+        board[44][10] = '.'
+    else:
+        final_game()
+
+    import end_screen_win
+    end_screen_win.end_screen
+
 def final_game():
     import dojo_warm_hot
     dojo_warm_hot.main()
+
+
 
 #*********************************
 
 def main():
     start_screen()
 
-    points = 100
+    points = 20
 
     inventory = {'torch':1}
     chest_1 = ['key_1', 'shovel', 'torch', 'goldcoin']
@@ -142,6 +181,10 @@ def main():
         print("***** Points: ", points,"*****")
         print('')
         print_table(inventory, 1)
+
+        if points < 1:
+            print('dupa')
+            lose_game()
 
         pressedkey = getch()   # 4 petle definiujace ruch postaci
         if pressedkey is 'w' or pressedkey is 'W':
@@ -290,7 +333,8 @@ def main():
                 third_game()
         if pressedkey == 'g' and filename == 'board_4.csv':
             if board[24][1] == '@' or board[25][2] == '@' or board[25][3] == '@':
-                final_game()
+                os.system('clear')
+                guards_main(inventory, board)
 
 #*********************ZMIANA MAPY**************************************
 
