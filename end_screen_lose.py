@@ -21,8 +21,5 @@ def end_screen():
     if quit == "q":
         sys.exit()
 
-
-
-
 if __name__ == '__main__':
     end_screen()

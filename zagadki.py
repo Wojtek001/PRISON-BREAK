@@ -28,8 +28,7 @@ def riddle():
         writer = csv.writer(outfile)
         writer.writerow(points_riddle)
 
-    print("sum: ",points_riddle)
-
+    print("sum: ", points_riddle)
 
 
 if __name__ == '__main__':

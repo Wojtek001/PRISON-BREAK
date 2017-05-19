@@ -18,11 +18,10 @@ def end_screen():
                                                                                                                                ''')
     for i in range(20):
         print("")
-    
+        
     time.sleep(2)
 
 
 if __name__ == '__main__':
     end_screen()
 
-    

@@ -20,7 +20,7 @@ def getch():
 
 
 def create_board(filename):
-
+    '''otwiera mapę z pliku CSV i tworzy na jej podstawie plansze'''
     with open(filename, mode='r') as infile:
         reader = csv.reader(infile)
 
@@ -32,34 +32,23 @@ def create_board(filename):
 
 
 def insert_player(board, y_axis, x_axis):
+    '''wstawia ikonę gracza na planszę'''
     board[y_axis][x_axis] = '@'
 
 
 def print_board(board):
+    '''wyświetla mapę z wewnętrznej listy (usuwa przecinki z listy list)'''
     for row in board:
         print("".join(row))
-# SPRAWDZIC CZY NIE SKASOWAC TEJ FUNKCJI
 
-
-def change_map(board):
-    if board[13][16]:
-        filename = "board_2.csv"
-    return filename
 # _---------------------------------------
 # --------------------------------------BACKPACK--------------------------------
 
-
-def display_inventory(inventory):
-    total_items = 0
-    for key in inventory:
-        print(key, ':', inventory[key])
-        total_items += inventory[key]
-    print(''*80)
-    print("Total number of items: ", total_items)
 # dodaje listę elementów do aktualnego inventory
 
 
 def add_to_inventory(inventory, added_items):
+    '''dodaje przedmioty do inventory'''
     for item in added_items:
         if item in inventory:
             inventory[item] = inventory[item] + 1
@@ -69,7 +58,7 @@ def add_to_inventory(inventory, added_items):
 
 
 def print_table(inventory, order=None):
-
+    '''wyświetla tabelę z posiadanymi przedmiotami'''
     sorted_inventory = []
     total_items = 0
 # sprawdza długość najdłuższego słowa w słowniku
@@ -99,31 +88,37 @@ def print_table(inventory, order=None):
 
 
 def show_start_screen():
+    '''włącza ekran startowy'''
     import game_comp
     game_comp.main()
 
 
 def lose_game():
+    '''włącza ekran w razie przegranej'''
     import end_screen_lose
     end_screen_lose.end_screen()
 
 
 def open_first_game():
+    '''włącza pierwszą mini-grę'''
     import mini_hang
     mini_hang.hang_main()
 
 
 def open_second_game():
+    '''włącza drugą mini-grę'''
     import zagadki
     zagadki.riddle()
 
 
 def open_third_game():
+    '''włącza trzecią mini-grę'''
     import roll_dice
     roll_dice.dice_main()
 
 
 def show_guards(inventory, board):
+    '''pokazuje sylwetki strażników (opcjonalnie załącza ostatnią mini grę) i włącza ekran końcowy'''
 
     print('''
             \\\|||///               \\\|||///                \\\|||///
@@ -141,7 +136,7 @@ def show_guards(inventory, board):
             #----' -----'           #----' -----'            #----' -----'
 
 
-    If you have 5 gold coins you can pass, else you have to play our game to go away!
+            If you have 5 gold coins you can pass, else you have to play our game to go away!
 
     ''')
 
@@ -157,6 +152,7 @@ def show_guards(inventory, board):
 
 
 def open_final_game():
+    '''otwiera ostatnią mini-grę'''
     import dojo_warm_hot
     dojo_warm_hot.user_guess()
 
@@ -164,6 +160,7 @@ def open_final_game():
 
 
 def show_hall_of_fame(points):
+    '''pokazuję hall of game i dopisuje do niej osiągnięty wynik'''
     date = datetime.date.today()
     os.system('clear')
     highscores = open('score.txt').read()
