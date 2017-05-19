@@ -98,7 +98,7 @@ def print_table(inventory, order=None):
 # ****************WŁĄCZANIE MODUŁÓW*****************************************
 
 
-def start_screen():
+def show_start_screen():
     import game_comp
     game_comp.main()
 
@@ -108,22 +108,22 @@ def lose_game():
     end_screen_lose.end_screen()
 
 
-def first_game():
+def open_first_game():
     import mini_hang
     mini_hang.hang_main()
 
 
-def second_game():
+def open_second_game():
     import zagadki
     zagadki.riddle()
 
 
-def third_game():
+def open_third_game():
     import roll_dice
     roll_dice.dice_main()
 
 
-def guards_main(inventory, board):
+def show_guards(inventory, board):
 
     print('''
             \\\|||///               \\\|||///                \\\|||///
@@ -150,20 +150,20 @@ def guards_main(inventory, board):
     if answer == 'p' and inventory['goldcoin'] > 7:
         board[44][10] = '.'
     else:
-        final_game()
+        open_final_game()
 
     import end_screen_win
     end_screen_win.end_screen()
 
 
-def final_game():
+def open_final_game():
     import dojo_warm_hot
     dojo_warm_hot.user_guess()
 
 # Save the winner score to txt file and print last highscores
 
 
-def hall_of_fame(points):
+def show_hall_of_fame(points):
     date = datetime.date.today()
     os.system('clear')
     highscores = open('score.txt').read()
@@ -180,7 +180,7 @@ def hall_of_fame(points):
 
 
 def main():
-    start_screen()
+    show_start_screen()
 
     points = 20
 
@@ -348,7 +348,7 @@ def main():
 # ***********WŁĄCZANIE MINIGIER**************************************
         if pressedkey == 'g' and 'game_ticket' in inventory:
             if board[10][3] == '@' or board[11][1] == '@' or board[11][2] == '@':
-                first_game()
+                open_first_game()
                 inventory['game_ticket'] = inventory['game_ticket'] -1
 
                 with open("points.csv", mode='r') as infile:
@@ -360,7 +360,7 @@ def main():
 
         if pressedkey == 'g' and filename == 'board_2.csv':
             if board[13][35] == '@' or board[12][36] == '@' or board[12][37] == '@':
-                second_game()
+                open_second_game()
                 inventory['game_ticket'] = inventory['game_ticket'] -1
 
                 with open("points.csv", mode='r') as infile:
@@ -372,7 +372,7 @@ def main():
 
         if pressedkey == 'g' and filename == 'board_3.csv':
             if board[25][24] == '@' or board[25][25] == '@' or board[24][26] == '@':
-                third_game()
+                open_third_game()
                 inventory['game_ticket'] = inventory['game_ticket'] -1
 
                 with open("points.csv", mode='r') as infile:
@@ -385,8 +385,8 @@ def main():
         if pressedkey == 'g' and filename == 'board_4.csv':
             if board[24][1] == '@' or board[25][2] == '@' or board[25][3] == '@':
                 os.system('clear')
-                guards_main(inventory, board)
-                hall_of_fame(points)
+                show_guards(inventory, board)
+                show_hall_of_fame(points)
 
 # *********************ZMIANA MAPY**************************************
 
